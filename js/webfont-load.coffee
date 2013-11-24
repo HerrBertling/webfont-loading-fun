@@ -6,7 +6,7 @@ $(window).ready =>
   fontsNotYetLoaded = []
   $.getJSON "#{fontAPIURL}?sort=#{fontFamilySorting}&key=#{yourAPIkey}", (data) ->
     output = "<ul>"
-    for i of data.items when i < 10
+    for i of data.items
       output += "<li style='font-family:\"#{data.items[i].family}\", Helvetica'><input type='radio' name='fontselection' value='#{data.items[i].family}' id='#{data.items[i].family}' /><label for='#{data.items[i].family}'>#{data.items[i].family}</label></li>"
       fontFamilies.push data.items[i].family
     output += "</ul>"

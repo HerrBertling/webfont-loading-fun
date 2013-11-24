@@ -15,9 +15,6 @@
 
       output = "<ul>";
       for (i in data.items) {
-        if (!(i < 10)) {
-          continue;
-        }
         output += "<li style='font-family:\"" + data.items[i].family + "\", Helvetica'><input type='radio' name='fontselection' value='" + data.items[i].family + "' id='" + data.items[i].family + "' /><label for='" + data.items[i].family + "'>" + data.items[i].family + "</label></li>";
         fontFamilies.push(data.items[i].family);
       }
