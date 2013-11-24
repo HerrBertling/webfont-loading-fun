@@ -1,12 +1,12 @@
 $(window).ready =>
-  yourAPIkey = 'AIzaSyAUOPNgxDiqhzZG_auoJMYsySfOVjFSlfs'
-  fontFamilySorting = 'popularity'
+  yourAPIkey = 'YourAPIkey'
+  fontFamilySorting = 'alpha'
   fontAPIURL = 'https://www.googleapis.com/webfonts/v1/webfonts'
   fontFamilies = []
   fontsNotYetLoaded = []
   $.getJSON "#{fontAPIURL}?sort=#{fontFamilySorting}&key=#{yourAPIkey}", (data) ->
     output = "<ul>"
-    for i of data.items
+    for i of data.items when i < 10
       output += "<li style='font-family:\"#{data.items[i].family}\", Helvetica'><input type='radio' name='fontselection' value='#{data.items[i].family}' id='#{data.items[i].family}' /><label for='#{data.items[i].family}'>#{data.items[i].family}</label></li>"
       fontFamilies.push data.items[i].family
     output += "</ul>"
@@ -25,7 +25,7 @@ $(window).ready =>
       inactive: () ->
         fontsNotYetLoaded.push font
         loadFont(fontList) if fontList.length > 0
-      timeout: 2000
+      timeout: 1000
     s = document.createElement 'script'
     s.src = "#{if document.location.protocol is 'https:' then 'https' else 'http'}://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"
     s.type = 'text/javascript'
@@ -43,12 +43,9 @@ $(window).ready =>
         loadFont(fontList) if fontList.length > 0
       inactive: () ->
         fontsNotYetLoaded.push font
-        if fontList.length > 0
-          loadFont(fontList)
-        else
-          fontList.push fontsNotYetLoaded...
+        loadFont(fontList) if fontList.length > 0
         console.log fontsNotYetLoaded
-      timeout: 2000
+      timeout: 1000
 
   getCharacters = (stringWithCharacters) ->
     characterArray = stringWithCharacters.split('')
@@ -59,7 +56,7 @@ $(window).ready =>
     y = undefined
     x = 0
     while x < origLen
-      found = `undefined`
+      found = 'undefined'
       y = 0
       while y < newArr.length
         if characterArray[x] is newArr[y]

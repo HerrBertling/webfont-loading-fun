@@ -5,8 +5,8 @@
   $(window).ready(function() {
     var fontAPIURL, fontFamilies, fontFamilySorting, fontsNotYetLoaded, getCharacters, initializeFontLoading, loadFont, yourAPIkey;
 
-    yourAPIkey = 'AIzaSyAUOPNgxDiqhzZG_auoJMYsySfOVjFSlfs';
-    fontFamilySorting = 'popularity';
+    yourAPIkey = 'YourAPIkey';
+    fontFamilySorting = 'alpha';
     fontAPIURL = 'https://www.googleapis.com/webfonts/v1/webfonts';
     fontFamilies = [];
     fontsNotYetLoaded = [];
@@ -15,6 +15,9 @@
 
       output = "<ul>";
       for (i in data.items) {
+        if (!(i < 10)) {
+          continue;
+        }
         output += "<li style='font-family:\"" + data.items[i].family + "\", Helvetica'><input type='radio' name='fontselection' value='" + data.items[i].family + "' id='" + data.items[i].family + "' /><label for='" + data.items[i].family + "'>" + data.items[i].family + "</label></li>";
         fontFamilies.push(data.items[i].family);
       }
@@ -43,7 +46,7 @@
             return loadFont(fontList);
           }
         },
-        timeout: 2000
+        timeout: 1000
       };
       s = document.createElement('script');
       s.src = "" + (document.location.protocol === 'https:' ? 'https' : 'http') + "://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";
@@ -70,12 +73,10 @@
           fontsNotYetLoaded.push(font);
           if (fontList.length > 0) {
             loadFont(fontList);
-          } else {
-            fontList.push.apply(fontList, fontsNotYetLoaded);
           }
           return console.log(fontsNotYetLoaded);
         },
-        timeout: 2000
+        timeout: 1000
       });
     };
     return getCharacters = function(stringWithCharacters) {
@@ -89,7 +90,7 @@
       y = void 0;
       x = 0;
       while (x < origLen) {
-        found = undefined;
+        found = 'undefined';
         y = 0;
         while (y < newArr.length) {
           if (characterArray[x] === newArr[y]) {
