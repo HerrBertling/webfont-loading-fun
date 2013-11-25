@@ -15,7 +15,6 @@ $(window).ready =>
 
   initializeFontLoading = (fontList) ->
     font = fontList.shift()
-    console.log getCharacters(font)
     window.WebFontConfig =
       google:
         families: [font]
@@ -25,7 +24,8 @@ $(window).ready =>
       inactive: () ->
         fontsNotYetLoaded.push font
         loadFont(fontList) if fontList.length > 0
-      timeout: 1000
+        console.log fontsNotYetLoaded
+      timeout: 500
     s = document.createElement 'script'
     s.src = "#{if document.location.protocol is 'https:' then 'https' else 'http'}://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"
     s.type = 'text/javascript'
@@ -34,7 +34,6 @@ $(window).ready =>
 
   loadFont = (fontList) ->
     font = fontList.shift()
-    console.log getCharacters(font)
     WebFont.load
       google:
         families: [font]
@@ -44,8 +43,7 @@ $(window).ready =>
       inactive: () ->
         fontsNotYetLoaded.push font
         loadFont(fontList) if fontList.length > 0
-        console.log fontsNotYetLoaded
-      timeout: 1000
+      timeout: 500
 
   getCharacters = (stringWithCharacters) ->
     characterArray = stringWithCharacters.split('')
@@ -56,7 +54,7 @@ $(window).ready =>
     y = undefined
     x = 0
     while x < origLen
-      found = 'undefined'
+      found = `undefined`
       y = 0
       while y < newArr.length
         if characterArray[x] is newArr[y]
@@ -67,6 +65,5 @@ $(window).ready =>
       x++
     newArr.sort()
     newStr = newArr.join('')
-    newStr = newStr.replace('|', '')
-    newStr = newStr.replace(' ', '')
+    newStr = newStr.replace('|', '').replace(' ', '')
     newStr

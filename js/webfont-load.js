@@ -26,37 +26,7 @@
       var font, s;
 
       font = fontList.shift();
-      console.log(getCharacters(font));
       window.WebFontConfig = {
-        google: {
-          families: [font],
-          text: getCharacters(font)
-        },
-        active: function() {
-          if (fontList.length > 0) {
-            return loadFont(fontList);
-          }
-        },
-        inactive: function() {
-          fontsNotYetLoaded.push(font);
-          if (fontList.length > 0) {
-            return loadFont(fontList);
-          }
-        },
-        timeout: 1000
-      };
-      s = document.createElement('script');
-      s.src = "" + (document.location.protocol === 'https:' ? 'https' : 'http') + "://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";
-      s.type = 'text/javascript';
-      s.async = 'true';
-      return document.body.appendChild(s);
-    };
-    loadFont = function(fontList) {
-      var font;
-
-      font = fontList.shift();
-      console.log(getCharacters(font));
-      return WebFont.load({
         google: {
           families: [font],
           text: getCharacters(font)
@@ -73,7 +43,35 @@
           }
           return console.log(fontsNotYetLoaded);
         },
-        timeout: 1000
+        timeout: 500
+      };
+      s = document.createElement('script');
+      s.src = "" + (document.location.protocol === 'https:' ? 'https' : 'http') + "://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";
+      s.type = 'text/javascript';
+      s.async = 'true';
+      return document.body.appendChild(s);
+    };
+    loadFont = function(fontList) {
+      var font;
+
+      font = fontList.shift();
+      return WebFont.load({
+        google: {
+          families: [font],
+          text: getCharacters(font)
+        },
+        active: function() {
+          if (fontList.length > 0) {
+            return loadFont(fontList);
+          }
+        },
+        inactive: function() {
+          fontsNotYetLoaded.push(font);
+          if (fontList.length > 0) {
+            return loadFont(fontList);
+          }
+        },
+        timeout: 500
       });
     };
     return getCharacters = function(stringWithCharacters) {
@@ -87,7 +85,7 @@
       y = void 0;
       x = 0;
       while (x < origLen) {
-        found = 'undefined';
+        found = undefined;
         y = 0;
         while (y < newArr.length) {
           if (characterArray[x] === newArr[y]) {
@@ -103,8 +101,7 @@
       }
       newArr.sort();
       newStr = newArr.join('');
-      newStr = newStr.replace('|', '');
-      newStr = newStr.replace(' ', '');
+      newStr = newStr.replace('|', '').replace(' ', '');
       return newStr;
     };
   });
