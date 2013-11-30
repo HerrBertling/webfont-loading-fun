@@ -1,12 +1,17 @@
 @import compass
 
+$border-grey: #999999
+$font-color: #333333
+$accent-color: #BCE089
+$subtle-grey: #FAFAFA
+
 body 
   font-family: Helvetica, Arial, sans-serif
-  font-size: 16px
+  font-size: 12px
   line-height: 1.5em
 
 .wrapper 
-  width: 300px
+  width: 400px
   margin: 50px auto
 
 h1 
@@ -17,29 +22,53 @@ h1
   margin: 3rem 0
 
 .wrapper
+  strong
+    background-color: $subtle-grey
+    border-bottom: 1px solid $border-grey
+    border-top: 1px solid $border-grey
+    display: block
+    font-size: 0.75rem
+    font-weight: normal
+    padding: 0.5rem 1rem
+    text-align: right
+    cursor: pointer
+    &:after
+      content: '\25BC'
+      display: inline-block
+      +transition(transform, 150ms, ease-in)
+    &.opened
+      &:after
+        content: '\25BC'
+        +rotate(90deg)
+
+
   ul 
     list-style-type: none
     margin: 0
     padding: 0
   li 
-    border-bottom: 1px solid #999
+    border-bottom: 1px solid $border-grey
     word-wrap: break-word
+    &:last-child
+      border-bottom: 0
     label 
       font-weight: normal
-      color: #333
-      font-size: 1.5rem
-      padding: 1.5rem 1rem
+      color: $font-color
+      font-size: 1rem
+      padding: 1rem 0.5rem
       display: block
       cursor: pointer
       background-color: transparent
       +transition(background-color 0.2s ease-in)
+      &:hover
+        background-color: desaturate(lighten($accent-color,20%),30%)
     input
       display: none
       &:checked + label
-        background-color: #BCE089
+        background-color: $accent-color
 .subsets,
 .variants 
-  color: #999
+  color: $border-grey
   font-size: 1rem
   font-style: normal
   margin: 1rem 0
