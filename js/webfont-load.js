@@ -6,7 +6,7 @@
   $(window).ready(function() {
     var FontLoading, firstTimeFontLoad, fontAPIURL, fontFamilies, fontFamilySorting, fontsNotYetLoaded, yourAPIkey;
 
-    yourAPIkey = 'AIzaSyCE1n4RANiXyCL2-bC-d9llZQsEvQKUixo';
+    yourAPIkey = 'yourAPIkey';
     fontFamilySorting = 'popularity';
     fontAPIURL = 'https://www.googleapis.com/webfonts/v1/webfonts';
     fontFamilies = [];

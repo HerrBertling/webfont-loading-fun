@@ -1,6 +1,6 @@
 $(window).ready =>
   
-  yourAPIkey = 'AIzaSyCE1n4RANiXyCL2-bC-d9llZQsEvQKUixo'
+  yourAPIkey = 'yourAPIkey'
   fontFamilySorting = 'popularity'
   fontAPIURL = 'https://www.googleapis.com/webfonts/v1/webfonts'
   fontFamilies = []
